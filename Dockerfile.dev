@@ -1,0 +1,24 @@
+FROM node:14-alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "start"]
+
+# USING .DEV FILE
+# docker build -f Dockerfile.dev .
+
+# RUN TESTS ON SRC IN IMAGE
+# docker exec -it <CONTAINER ID> npm run test
+
+# RUN USING VOLUMES TO MAP LOCAL DIRS TO CONTAINER DIRS, ALLOWS FOR AUTO UPDATE OF SOURCE
+# USE IMAGE node_modules AND THEN MAP ALL OTHER DIRECTORIES TO LOCAL MACHINE
+# docker run -p 4000:3000 -v /app/node_modules -v $(pwd):/app <image id>
+
+
+
+# ALTERNATIVELY, USE DOCKER-COMPOSE TO BUILD, TEST, AND RUN
